@@ -161,9 +161,8 @@ const LandingPage = () => {
                 disabled={isSubmitting}
               />
               <Button 
-                type="submit" 
-                className="btn-primary"
-                disabled={isSubmitting}
+                className="btn-primary w-full"
+                onClick={() => navigate('/signup')}
               >
                 {isSubmitting ? 'Joining...' : 'Join Beta'}
               </Button>
