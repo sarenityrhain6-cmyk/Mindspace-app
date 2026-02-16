@@ -11,6 +11,7 @@ from datetime import datetime, timezone
 from routes.beta import router as beta_router
 from routes.auth import router as auth_router
 from routes.payments import router as payments_router
+from routes.reflections import router as reflections_router
 from database import db, client
 
 
@@ -93,6 +94,9 @@ api_router.include_router(auth_router, prefix="/auth", tags=["Authentication"])
 
 # Include payment routes
 api_router.include_router(payments_router, prefix="/payments", tags=["Payments"])
+
+# Include reflection routes
+api_router.include_router(reflections_router, prefix="/reflections", tags=["Reflections"])
 
 # Include the router in the main app
 app.include_router(api_router)
