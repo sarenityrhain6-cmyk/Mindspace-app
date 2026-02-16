@@ -9,6 +9,8 @@ from typing import List
 import uuid
 from datetime import datetime, timezone
 from routes.beta import router as beta_router
+from routes.auth import router as auth_router
+from routes.payments import router as payments_router
 from database import db, client
 
 
@@ -85,6 +87,12 @@ async def get_status_checks():
 
 # Include beta routes
 api_router.include_router(beta_router, tags=["Beta Signups"])
+
+# Include auth routes
+api_router.include_router(auth_router, prefix="/auth", tags=["Authentication"])
+
+# Include payment routes
+api_router.include_router(payments_router, prefix="/payments", tags=["Payments"])
 
 # Include the router in the main app
 app.include_router(api_router)
