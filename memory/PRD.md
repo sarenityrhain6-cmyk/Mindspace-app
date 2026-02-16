@@ -289,3 +289,74 @@ ReflectionResponse:
 ---
 
 **End of Week 1 PRD**
+
+---
+
+## 12. Mobile App Development Plan (Week 7-8)
+
+### **Platform:** Android (Google Play Store)
+
+### **Approach:** Capacitor (Wrap Existing React App)
+
+**Rationale:**
+- 95% code reuse from web app
+- Fastest time to market (2-3 weeks)
+- Single codebase maintenance
+- Native features when needed
+
+### **Week 7 Tasks:**
+1. ✅ Install Capacitor dependencies
+2. ✅ Configure Android platform
+3. ✅ Add mobile plugins (StatusBar, SplashScreen, App, Haptics)
+4. ✅ Create mobile initialization (capacitor.js)
+5. ✅ Add Privacy Policy page (/privacy)
+6. Build React app → test on Android
+7. Optimize UI for mobile touch targets
+8. Test all flows on device/emulator
+
+### **Week 8 Tasks:**
+1. Create app assets (icon, splash, feature graphic, screenshots)
+2. Set up Google Play Developer account ($25)
+3. Generate signed APK/AAB
+4. Complete Play Store listing
+5. Submit for review (1-7 days)
+6. Launch on Play Store!
+
+### **Mobile-Specific Features Implemented:**
+- ✅ Capacitor v7 integrated
+- ✅ Android platform configured
+- ✅ Status bar styling (green brand color)
+- ✅ Splash screen (2-second display)
+- ✅ Back button handler
+- ✅ App state management
+- ✅ Privacy policy page (required for Play Store)
+
+### **App Details:**
+- **Package ID:** com.mindspace.app
+- **App Name:** MindSpace
+- **Category:** Health & Fitness
+- **Target:** Android 7.0+ (API 24+)
+- **Size:** ~10-15 MB
+
+### **Google Play Store Requirements:**
+- ✅ Privacy Policy URL: /privacy
+- ✅ Terms of Service URL: /terms
+- ✅ Crisis disclaimers clear
+- ✅ Educational purpose stated
+- ✅ Content rating: Everyone/Teen
+- ✅ App icon (512x512px) - pending
+- ✅ Feature graphic (1024x500px) - pending
+- ✅ Screenshots (2+ required) - pending
+
+### **Post-Launch (Week 9+):**
+- Monitor Play Store reviews
+- Track download metrics
+- Respond to user feedback
+- Consider iOS version if successful
+
+### **Mobile App Guide:**
+Complete setup instructions: `/app/MOBILE_APP_GUIDE.md`
+
+---
+
+**End of PRD - Updated: December 17, 2024 (Mobile App Plan Added)**
