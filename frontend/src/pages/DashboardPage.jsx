@@ -9,20 +9,21 @@ const DashboardPage = () => {
   const authContext = useContext(AuthContext);
   const [accessInfo, setAccessInfo] = useState(null);
 
-  // Safety check for context
+  // Always call hooks first, then do conditional logic
+  useEffect(() => {
+    if (!authContext || !authContext.token) {
+      navigate('/signup');
+      return;
+    }
+    fetchAccessInfo();
+  }, [authContext?.token]);
+
+  // Safety check for context AFTER hooks
   if (!authContext) {
     return <div>Loading...</div>;
   }
 
   const { user, token, logout, checkAccess } = authContext;
-
-  useEffect(() => {
-    if (!token) {
-      navigate('/signup');
-      return;
-    }
-    fetchAccessInfo();
-  }, [token]);
 
   const fetchAccessInfo = async () => {
     const info = await checkAccess();
