@@ -126,33 +126,44 @@ async def get_current_user_info(current_user: User = Depends(get_current_user)):
 @router.get("/access-check")
 async def check_access(current_user: User = Depends(get_current_user)):
     """Check if user has access to paid features"""
-    # Beta testers get free access
-    if current_user.is_beta_tester:
-        return {
-            "has_access": True,
-            "reason": "beta_tester",
-            "free_reflections_remaining": "unlimited"
-        }
     
-    # Paid users get full access
-    if current_user.has_paid:
-        return {
-            "has_access": True,
-            "reason": "paid",
-            "free_reflections_remaining": 0
-        }
-    
-    # Free users get 1 free reflection
-    if current_user.free_reflections_used < 1:
-        return {
-            "has_access": True,
-            "reason": "free_trial",
-            "free_reflections_remaining": 1 - current_user.free_reflections_used
-        }
-    
-    # No access - need to pay
+    # BETA MODE: Everyone gets unlimited free access during beta testing (Weeks 4-6)
+    # TODO: Re-enable payment requirement after beta (Week 7+)
     return {
-        "has_access": False,
-        "reason": "payment_required",
-        "free_reflections_remaining": 0
+        "has_access": True,
+        "reason": "beta_period",
+        "free_reflections_remaining": "unlimited",
+        "message": "Free unlimited access during beta testing!"
     }
+    
+    # Original payment logic (commented out for beta):
+    # # Beta testers get free access
+    # if current_user.is_beta_tester:
+    #     return {
+    #         "has_access": True,
+    #         "reason": "beta_tester",
+    #         "free_reflections_remaining": "unlimited"
+    #     }
+    # 
+    # # Paid users get full access
+    # if current_user.has_paid:
+    #     return {
+    #         "has_access": True,
+    #         "reason": "paid",
+    #         "free_reflections_remaining": 0
+    #     }
+    # 
+    # # Free users get 1 free reflection
+    # if current_user.free_reflections_used < 1:
+    #     return {
+    #         "has_access": True,
+    #         "reason": "free_trial",
+    #         "free_reflections_remaining": 1 - current_user.free_reflections_used
+    #     }
+    # 
+    # # No access - need to pay
+    # return {
+    #     "has_access": False,
+    #     "reason": "payment_required",
+    #     "free_reflections_remaining": 0
+    # }

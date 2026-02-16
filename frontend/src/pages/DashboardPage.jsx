@@ -23,13 +23,16 @@ const DashboardPage = () => {
   };
 
   const handleStartReflection = async () => {
-    const info = await checkAccess();
+    // BETA MODE: Skip access check, allow everyone to use app freely
+    navigate('/app/reflection');
     
-    if (info.has_access) {
-      navigate('/app/reflection');
-    } else {
-      navigate('/paywall');
-    }
+    // Original payment logic (commented out for beta):
+    // const info = await checkAccess();
+    // if (info.has_access) {
+    //   navigate('/app/reflection');
+    // } else {
+    //   navigate('/paywall');
+    // }
   };
 
   const handleLogout = () => {
@@ -74,7 +77,15 @@ const DashboardPage = () => {
             
             {accessInfo && (
               <div className="access-status mt-4">
-                {accessInfo.has_access && accessInfo.reason === 'beta_tester' && (
+                {/* BETA MODE: Show free access banner */}
+                <div className="info-box" style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-strong))', color: 'white' }}>
+                  <p className="body-medium">
+                    🎉 <strong>Free Beta Access!</strong> Unlimited reflections during testing period (Weeks 4-6). Thank you for helping us improve MindSpace!
+                  </p>
+                </div>
+                
+                {/* Original access status (commented out for beta) */}
+                {/* {accessInfo.has_access && accessInfo.reason === 'beta_tester' && (
                   <div className="info-box">
                     <p className="body-medium">🌟 Beta Tester - Unlimited free access!</p>
                   </div>
@@ -98,7 +109,7 @@ const DashboardPage = () => {
                       You've used your free reflection. Unlock unlimited access for $1!
                     </p>
                   </div>
-                )}
+                )} */}
               </div>
             )}
           </div>
