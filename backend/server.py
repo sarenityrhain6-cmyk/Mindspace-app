@@ -38,6 +38,27 @@ class StatusCheckCreate(BaseModel):
 async def root():
     return {"message": "MindSpace API is running"}
 
+# Health check endpoint for Kubernetes
+@app.get("/health")
+async def health_check():
+    """
+    Health check endpoint for Kubernetes liveness/readiness probes
+    """
+    try:
+        # Simple ping to verify MongoDB connection
+        await db.command('ping')
+        return {
+            "status": "healthy",
+            "database": "connected",
+            "service": "mindspace"
+        }
+    except Exception as e:
+        return {
+            "status": "unhealthy",
+            "database": "disconnected",
+            "error": str(e)
+        }
+
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
     status_dict = input.model_dump()
