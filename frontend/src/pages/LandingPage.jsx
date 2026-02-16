@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { AlertCircle, Phone } from 'lucide-react';
-import { mockEmailSubmission } from '../mockData';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -19,14 +22,17 @@ const LandingPage = () => {
     }
 
     setIsSubmitting(true);
+    setSubmitMessage('');
+    
     try {
-      const result = await mockEmailSubmission(email);
-      setSubmitMessage(result.message);
+      const response = await axios.post(`${API}/beta-signup`, { email });
+      setSubmitMessage(response.data.message);
       setEmail('');
       setTimeout(() => {
         navigate('/terms');
       }, 1500);
     } catch (error) {
+      console.error('Error submitting email:', error);
       setSubmitMessage('Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
