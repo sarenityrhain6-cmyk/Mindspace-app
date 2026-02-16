@@ -1,18 +1,13 @@
 from fastapi import APIRouter, HTTPException
 from models.beta_signup import BetaSignup, BetaSignupCreate, BetaSignupResponse
-from motor.motor_asyncio import AsyncIOMotorClient
-import os
-from dotenv import load_dotenv
 import logging
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
-# MongoDB connection
-mongo_url = os.environ.get('MONGO_URL')
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ.get('DB_NAME', 'mindspace')]
+# Import db from server.py to avoid duplicate connection
+from server import db
 
 
 @router.post("/beta-signup", response_model=BetaSignupResponse)
