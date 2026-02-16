@@ -22,12 +22,15 @@ export const AuthProvider = ({ children }) => {
   const fetchUserInfo = async () => {
     try {
       const response = await axios.get(`${API}/auth/me`, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
+        timeout: 5000 // 5 second timeout
       });
       setUser(response.data);
     } catch (error) {
       console.error('Failed to fetch user:', error);
-      logout();
+      // Don't logout on error during initial load - just clear invalid token
+      localStorage.removeItem('token');
+      setToken(null);
     } finally {
       setLoading(false);
     }
@@ -86,7 +89,20 @@ export const AuthProvider = ({ children }) => {
       checkAccess,
       refreshUser
     }}>
-      {children}
+      {loading ? (
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center', 
+          minHeight: '100vh',
+          background: 'white'
+        }}>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>🌿</div>
+            <div style={{ color: '#003720' }}>Loading MindSpace...</div>
+          </div>
+        </div>
+      ) : children}
     </AuthContext.Provider>
   );
 };

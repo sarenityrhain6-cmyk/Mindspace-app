@@ -6,8 +6,15 @@ import { Phone, FileText, Heart, AlertCircle, BarChart3, LogOut } from 'lucide-r
 
 const DashboardPage = () => {
   const navigate = useNavigate();
-  const { user, token, logout, checkAccess } = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
   const [accessInfo, setAccessInfo] = useState(null);
+
+  // Safety check for context
+  if (!authContext) {
+    return <div>Loading...</div>;
+  }
+
+  const { user, token, logout, checkAccess } = authContext;
 
   useEffect(() => {
     if (!token) {

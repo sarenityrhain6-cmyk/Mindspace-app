@@ -7,11 +7,18 @@ import { AlertCircle } from 'lucide-react';
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  // Safety check for context
+  if (!authContext) {
+    return <div>Loading...</div>;
+  }
+
+  const { login } = authContext;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
