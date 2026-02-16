@@ -1,13 +1,11 @@
 from fastapi import APIRouter, HTTPException
 from models.beta_signup import BetaSignup, BetaSignupCreate, BetaSignupResponse
+from database import db
 import logging
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
-
-# Import db from server.py to avoid duplicate connection
-from server import db
 
 
 @router.post("/beta-signup", response_model=BetaSignupResponse)
