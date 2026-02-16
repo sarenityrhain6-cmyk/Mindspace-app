@@ -151,7 +151,7 @@ const LandingPage = () => {
             <p className="body-large mb-6">
               Be among the first to experience MindSpace and help shape the future of trauma-informed self-reflection.
             </p>
-            <form onSubmit={handleEmailSubmit} className="email-form">
+            <form onSubmit={handleEmailSubmit} className="email-form" style={{display: 'none'}}>
               <Input
                 type="email"
                 placeholder="Enter your email address"
@@ -161,12 +161,20 @@ const LandingPage = () => {
                 disabled={isSubmitting}
               />
               <Button 
-                className="btn-primary w-full"
-                onClick={() => navigate('/signup')}
+                type="submit" 
+                className="btn-primary"
+                disabled={isSubmitting}
               >
                 {isSubmitting ? 'Joining...' : 'Join Beta'}
               </Button>
             </form>
+            <Button 
+              className="btn-primary"
+              size="lg"
+              onClick={() => navigate('/signup')}
+            >
+              Get Started - Free Trial
+            </Button>
             {submitMessage && (
               <p className={`body-small mt-4 ${submitMessage.includes('Thank') ? 'text-green-600' : 'text-red-600'}`}>
                 {submitMessage}
