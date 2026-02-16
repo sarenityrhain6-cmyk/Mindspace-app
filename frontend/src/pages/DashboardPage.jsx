@@ -151,7 +151,7 @@ const DashboardPage = () => {
               <Button 
                 variant="outline"
                 className="btn-secondary w-full"
-                onClick={() => alert('Regulation tool - Week 3 feature!')}
+                onClick={() => navigate('/app/regulation')}
               >
                 Start Regulation
               </Button>

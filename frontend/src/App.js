@@ -14,6 +14,7 @@ import ReflectionResultsPage from "./pages/ReflectionResultsPage";
 import PaywallPage from "./pages/PaywallPage";
 import PaymentSuccessPage from "./pages/PaymentSuccessPage";
 import PaymentCancelPage from "./pages/PaymentCancelPage";
+import RegulationPage from "./pages/RegulationPage";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/app/dashboard" element={<DashboardPage />} />
             <Route path="/app/reflection" element={<ReflectionPage />} />
             <Route path="/app/reflection-results" element={<ReflectionResultsPage />} />
+            <Route path="/app/regulation" element={<RegulationPage />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
