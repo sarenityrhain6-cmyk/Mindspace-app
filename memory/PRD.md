@@ -356,14 +356,18 @@ ReflectionResponse:
 5. Submit for review (1-7 days)
 6. Launch on Play Store!
 
-### **Mobile-Specific Features Implemented:**
+### **Mobile App Status (Feb 17, 2026):**
 - ✅ Capacitor v7 integrated
 - ✅ Android platform configured
+- ✅ Web assets synced to Android project
 - ✅ Status bar styling (green brand color)
 - ✅ Splash screen (2-second display)
 - ✅ Back button handler
 - ✅ App state management
 - ✅ Privacy policy page (required for Play Store)
+- ⏳ APK build: Requires Android Studio on local machine
+
+**Build Guide:** `/app/BUILD_ANDROID_APK.md`
 
 ### **App Details:**
 - **Package ID:** com.mindspace.app
@@ -378,9 +382,9 @@ ReflectionResponse:
 - ✅ Crisis disclaimers clear
 - ✅ Educational purpose stated
 - ✅ Content rating: Everyone/Teen
-- ✅ App icon (512x512px) - pending
-- ✅ Feature graphic (1024x500px) - pending
-- ✅ Screenshots (2+ required) - pending
+- ⏳ App icon (512x512px) - needs design
+- ⏳ Feature graphic (1024x500px) - needs design
+- ⏳ Screenshots (2+ required) - capture from device
 
 ### **Post-Launch (Week 9+):**
 - Monitor Play Store reviews
