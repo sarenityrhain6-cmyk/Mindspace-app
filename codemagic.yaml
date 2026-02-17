@@ -6,6 +6,9 @@ workflows:
     environment:
       java: 17
       node: 18
+      vars:
+        REACT_APP_BACKEND_URL: "https://mindspace-preview.preview.emergentagent.com"
+        CI: "false"
     scripts:
       - name: Install dependencies
         working_directory: frontend
