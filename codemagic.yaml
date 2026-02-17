@@ -25,13 +25,10 @@ workflows:
         working_directory: frontend
         script: |
           npx cap sync android
-      - name: Build Debug APK
+      - name: Build Release Bundle
         working_directory: frontend/android
         script: |
-          ./gradlew assembleDebug
-      - name: Build Release APK
-        working_directory: frontend/android
-        script: |
-          ./gradlew assembleRelease
+          ./gradlew bundleRelease
     artifacts:
+      - frontend/android/app/build/outputs/**/*.aab
       - frontend/android/app/build/outputs/**/*.apk
