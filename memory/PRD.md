@@ -59,44 +59,56 @@ The app will be built in weekly phases:
 
 ---
 
-## 4. What's Been Implemented (Week 1 - Dec 17, 2024)
+## 4. What's Been Implemented (Completed Feb 17, 2026)
 
-### ✅ Completed Features
+### ✅ All Core Features Implemented & Tested
+
+#### Authentication System
+- **Signup** (`/signup`): Email/password registration with JWT
+- **Login** (`/login`): JWT authentication 
+- **Protected Routes**: Dashboard, Reflection, Regulation tools require auth
+- **Beta Mode**: Payment bypassed for unlimited free access
 
 #### Landing Page (`/`)
 - Hero section with gradient background
 - "What It Is" section with calming nature imagery
 - "Who It's For" cards (3 user types)
 - Safety section with crisis contact buttons
-- Email collection form (beta signup)
-- **Backend Integration:** Stores emails in MongoDB via `/api/beta-signup`
+- "Get Started - Free Trial" CTA button
 
-#### Terms & Safety Page (`/terms`)
-- Complete Terms of Use document
-- Scrollable content area
-- Checkbox consent requirement
-- Crisis disclaimer section
-- Navigation to app or back to landing
+#### User Flow Pages
+- **Welcome** (`/app/welcome`): Educational purpose statement
+- **Safety Consent** (`/app/safety-consent`): Crisis acknowledgment
+- **Dashboard** (`/app/dashboard`): Navigation to all features
+  - Start Reflection button
+  - View Results button  
+  - Regulation Tool button
+  - Beta access banner
 
-#### Welcome Screen (`/app/welcome`)
-- Welcoming hero icon
-- Educational purpose statement
-- Calming image
-- Continue button → Safety Consent
+#### 10-Question Reflection Module (`/app/reflection`)
+- 10 trauma-informed questions
+- 0-3 scale (Never, Sometimes, Often, Almost Always)
+- Auto-advance to next question
+- Progress bar and question dots
+- "See My Results" button on completion
 
-#### Safety Consent Screen (`/app/safety-consent`)
-- "Before We Begin" alert
-- Important information section
-- Crisis contact cards (tel:988, tel:911, tel:emergency)
-- Acknowledgment list (4 points)
-- "I Understand & Agree" button
-- Emergency support external link
+#### Results Page (`/app/reflection-results`)
+- Total score display (0-30)
+- Score interpretation:
+  - 0-9: Lower Activation Patterns
+  - 10-19: Moderate Activation Patterns
+  - 20-30: Higher Activation Patterns
+- Educational disclaimer
 
-#### Dashboard (`/app/dashboard`)
-- 4 cards: Start Reflection, View Results, Regulation Tool, Emergency Support
-- Placeholder buttons for Week 2-3 features
-- Always-visible 988 button in header
-- Clean grid layout
+#### Regulation Tools (`/app/regulation`)
+- **Breathing Exercise**: 4-4-6 pattern with animated circle
+  - Start/Pause/Reset controls
+  - Time and cycles counter
+- **5-4-3-2-1 Grounding Technique**: Step-by-step guide
+
+#### Legal Pages
+- **Terms** (`/terms`): Terms of Service
+- **Privacy** (`/privacy`): Privacy Policy (required for Play Store)
 
 ### Backend API Endpoints
 ```
