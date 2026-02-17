@@ -2,24 +2,53 @@
 
 ## 📱 Google Play Store Submission Checklist
 
-### ✅ Week 7-8 Implementation Steps
+### ✅ Current Status (Updated Feb 2026)
+
+**What's Done:**
+- ✅ React web app built and tested
+- ✅ Capacitor initialized and configured
+- ✅ Android project created (`/app/frontend/android/`)
+- ✅ Web assets synced to Android project
+- ✅ App ID: `com.mindspace.app`
+- ✅ App Name: `MindSpace`
+
+**What You Need to Do (on your local machine):**
+1. Download the project
+2. Install Android Studio
+3. Build the APK
 
 ---
 
-## **Phase 1: Build & Test (Week 7)**
+## **Phase 1: Local Setup (Your Computer)**
 
-### Step 1: Build React App
+### Prerequisites
+You need to install these on YOUR computer:
+- **Android Studio** (https://developer.android.com/studio)
+- **Java JDK 17** (usually bundled with Android Studio)
+
+### Step 1: Download the Project
+Use the "Save to Github" feature in Emergent, then clone to your machine:
 ```bash
-cd /app/frontend
+git clone <your-github-repo-url>
+cd <project-name>/frontend
+```
+
+### Step 2: Install Dependencies
+```bash
+yarn install
+```
+
+### Step 3: Build React App (if not already built)
+```bash
 yarn build
 ```
 
-### Step 2: Sync with Capacitor
+### Step 4: Sync with Capacitor
 ```bash
 npx cap sync android
 ```
 
-### Step 3: Open in Android Studio
+### Step 5: Open in Android Studio
 ```bash
 npx cap open android
 ```
