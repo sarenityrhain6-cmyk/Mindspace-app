@@ -6,18 +6,21 @@ workflows:
     environment:
       java: 17
       node: 18
-      vars:
-        REACT_APP_BACKEND_URL: "https://mindspace-preview.preview.emergentagent.com"
-        CI: "false"
     scripts:
       - name: Install dependencies
         working_directory: frontend
         script: |
           npm install --legacy-peer-deps
+      - name: Setup environment
+        working_directory: frontend
+        script: |
+          echo "REACT_APP_BACKEND_URL=https://mindspace-preview.preview.emergentagent.com" > .env
+          echo "CI=false" >> .env
+          cat .env
       - name: Build React app
         working_directory: frontend
         script: |
-          npm run build
+          CI=false npm run build
       - name: Sync Capacitor
         working_directory: frontend
         script: |
