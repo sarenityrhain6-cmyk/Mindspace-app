@@ -6,17 +6,15 @@ workflows:
     environment:
       java: 17
       node: 18
-      groups:
-        - android_credentials
     scripts:
       - name: Install dependencies
         working_directory: frontend
         script: |
-          yarn install
+          npm install --legacy-peer-deps
       - name: Build React app
         working_directory: frontend
         script: |
-          yarn build
+          npm run build
       - name: Sync Capacitor
         working_directory: frontend
         script: |
