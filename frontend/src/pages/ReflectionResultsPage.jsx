@@ -20,6 +20,7 @@ const ReflectionResultsPage = () => {
   useEffect(() => {
     // Save reflection and increment counter if free user
     saveReflection();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const saveReflection = async () => {
