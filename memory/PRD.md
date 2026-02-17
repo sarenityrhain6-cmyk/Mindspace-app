@@ -110,17 +110,33 @@ The app will be built in weekly phases:
 - **Terms** (`/terms`): Terms of Service
 - **Privacy** (`/privacy`): Privacy Policy (required for Play Store)
 
-### Backend API Endpoints
+### Backend API Endpoints (All Working)
 ```
-POST /api/beta-signup
-  - Stores email in MongoDB
-  - Returns success message
-  - Prevents duplicate signups
+POST /api/auth/signup
+  - Creates new user with hashed password
+  - Returns JWT token and user data
 
-GET /api/beta-signups  
-  - Admin endpoint to view all signups
-  - Returns count and email list
+POST /api/auth/login
+  - Authenticates user credentials
+  - Returns JWT token and user data
+
+GET /api/auth/me
+  - Returns current user info (requires auth)
+
+GET /api/auth/access-check
+  - Returns beta_period access (always has_access: true)
+
+POST /api/beta-signup
+  - Stores beta tester emails in MongoDB
+
+GET /health
+  - Health check endpoint for monitoring
 ```
+
+### Testing Status (Feb 17, 2026)
+- **Backend**: 100% tests passing (21 tests)
+- **Frontend**: All flows tested and working
+- **E2E**: Signup → Login → Reflection → Results → Regulation all verified
 
 ### Design System Implementation
 - Green accent colors (#8FEC78, #81DD67)
