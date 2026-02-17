@@ -1,26 +1,29 @@
 workflows:
   android-workflow:
     name: Android Build
-    max_build_duration: 30
+    max_build_duration: 60
+    instance_type: mac_mini_m1
     environment:
       java: 17
       node: 18
+      groups:
+        - android_credentials
     scripts:
       - name: Install dependencies
+        working_directory: frontend
         script: |
-          cd frontend
-          npm install
+          yarn install
       - name: Build React app
+        working_directory: frontend
         script: |
-          cd frontend
-          npm run build
+          yarn build
       - name: Sync Capacitor
+        working_directory: frontend
         script: |
-          cd frontend
           npx cap sync android
       - name: Build Android APK
+        working_directory: frontend/android
         script: |
-          cd frontend/android
           ./gradlew assembleDebug
     artifacts:
       - frontend/android/app/build/outputs/**/*.apk
