@@ -11,12 +11,12 @@ workflows:
         working_directory: frontend
         script: |
           npm install --legacy-peer-deps
+          npm install ajv@^8 --save --legacy-peer-deps
       - name: Setup environment
         working_directory: frontend
         script: |
           echo "REACT_APP_BACKEND_URL=https://mindspace-preview.preview.emergentagent.com" > .env
           echo "CI=false" >> .env
-          cat .env
       - name: Build React app
         working_directory: frontend
         script: |
