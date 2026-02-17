@@ -1,4 +1,4 @@
-package com.mindspace.app;
+package com.sarenityrhain.mindspace;
 
 import com.getcapacitor.BridgeActivity;
 
