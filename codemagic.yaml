@@ -6,8 +6,6 @@ workflows:
     environment:
       java: 21
       node: 20
-      android_signing:
-        - mindspace_keystore
     scripts:
       - name: Install dependencies
         working_directory: frontend
@@ -27,13 +25,32 @@ workflows:
         working_directory: frontend
         script: |
           npx cap sync android
-      - name: Build Debug APK for testing
+      - name: Create keystore and sign
         working_directory: frontend/android
         script: |
-          ./gradlew assembleDebug
+          # Generate keystore
+          keytool -genkeypair -v \
+            -keystore app/mindspace-upload.keystore \
+            -alias upload \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -storepass android \
+            -keypass android \
+            -dname "CN=MindSpace, OU=Mobile, O=MindSpace, L=City, ST=State, C=US"
+          
+          # Create signing config file
+          echo "storeFile=mindspace-upload.keystore" > app/keystore.properties
+          echo "storePassword=android" >> app/keystore.properties
+          echo "keyAlias=upload" >> app/keystore.properties
+          echo "keyPassword=android" >> app/keystore.properties
+      - name: Build Signed Bundle
+        working_directory: frontend/android
+        script: |
+          ./gradlew bundleRelease \
+            -Pandroid.injected.signing.store.file=$(pwd)/app/mindspace-upload.keystore \
+            -Pandroid.injected.signing.store.password=android \
+            -Pandroid.injected.signing.key.alias=upload \
+            -Pandroid.injected.signing.key.password=android
     artifacts:
-      - frontend/android/app/build/outputs/apk/debug/app-debug.apk
-    publishing:
-      google_play:
-        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
-        track: internal
+      - frontend/android/app/build/outputs/bundle/release/app-release.aab
