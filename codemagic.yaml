@@ -6,6 +6,10 @@ workflows:
     environment:
       java: 21
       node: 20
+      vars:
+        CM_KEYSTORE_PASSWORD: mindspace123
+        CM_KEY_PASSWORD: mindspace123
+        CM_KEY_ALIAS: mindspace
     scripts:
       - name: Install dependencies
         working_directory: frontend
@@ -25,10 +29,43 @@ workflows:
         working_directory: frontend
         script: |
           npx cap sync android
-      - name: Build Release Bundle
+      - name: Generate Keystore
+        working_directory: frontend/android
+        script: |
+          keytool -genkeypair -v \
+            -keystore mindspace.keystore \
+            -alias $CM_KEY_ALIAS \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -storepass $CM_KEYSTORE_PASSWORD \
+            -keypass $CM_KEY_PASSWORD \
+            -dname "CN=MindSpace, OU=App, O=MindSpace, L=US, ST=US, C=US"
+      - name: Setup Signing Config
+        working_directory: frontend/android
+        script: |
+          cat >> app/build.gradle << 'SIGNING'
+          
+          android {
+              signingConfigs {
+                  release {
+                      storeFile file("../mindspace.keystore")
+                      storePassword System.getenv("CM_KEYSTORE_PASSWORD") ?: "mindspace123"
+                      keyAlias System.getenv("CM_KEY_ALIAS") ?: "mindspace"
+                      keyPassword System.getenv("CM_KEY_PASSWORD") ?: "mindspace123"
+                  }
+              }
+              buildTypes {
+                  release {
+                      signingConfig signingConfigs.release
+                  }
+              }
+          }
+          SIGNING
+      - name: Build Signed Release Bundle
         working_directory: frontend/android
         script: |
           ./gradlew bundleRelease
     artifacts:
       - frontend/android/app/build/outputs/**/*.aab
-      - frontend/android/app/build/outputs/**/*.apk
+      - frontend/android/mindspace.keystore
