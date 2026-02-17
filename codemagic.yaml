@@ -25,32 +25,45 @@ workflows:
         working_directory: frontend
         script: |
           npx cap sync android
-      - name: Create keystore and sign
+      - name: Create Upload Keystore
         working_directory: frontend/android
         script: |
-          # Generate keystore
-          keytool -genkeypair -v \
-            -keystore app/mindspace-upload.keystore \
+          # Create the upload keystore for Google Play
+          keytool -genkeypair \
+            -v \
+            -storetype JKS \
+            -keystore mindspace-upload-key.jks \
             -alias upload \
             -keyalg RSA \
             -keysize 2048 \
             -validity 10000 \
-            -storepass android \
-            -keypass android \
-            -dname "CN=MindSpace, OU=Mobile, O=MindSpace, L=City, ST=State, C=US"
+            -storepass MindSpace2024! \
+            -keypass MindSpace2024! \
+            -dname "CN=MindSpace App, OU=Mobile Development, O=Sarenity Rhain, L=United States, ST=US, C=US"
           
-          # Create signing config file
-          echo "storeFile=mindspace-upload.keystore" > app/keystore.properties
-          echo "storePassword=android" >> app/keystore.properties
-          echo "keyAlias=upload" >> app/keystore.properties
-          echo "keyPassword=android" >> app/keystore.properties
-      - name: Build Signed Bundle
+          echo "Keystore created successfully!"
+          echo ""
+          echo "========================================="
+          echo "SAVE THESE CREDENTIALS!"
+          echo "========================================="
+          echo "Keystore file: mindspace-upload-key.jks"
+          echo "Alias: upload"
+          echo "Store Password: MindSpace2024!"
+          echo "Key Password: MindSpace2024!"
+          echo "========================================="
+      - name: Build Signed Release Bundle
         working_directory: frontend/android
         script: |
           ./gradlew bundleRelease \
-            -Pandroid.injected.signing.store.file=$(pwd)/app/mindspace-upload.keystore \
-            -Pandroid.injected.signing.store.password=android \
+            -Pandroid.injected.signing.store.file=$(pwd)/mindspace-upload-key.jks \
+            -Pandroid.injected.signing.store.password=MindSpace2024! \
             -Pandroid.injected.signing.key.alias=upload \
-            -Pandroid.injected.signing.key.password=android
+            -Pandroid.injected.signing.key.password=MindSpace2024!
+          
+          echo ""
+          echo "Build complete! Download both files:"
+          echo "1. app-release.aab (upload to Play Store)"
+          echo "2. mindspace-upload-key.jks (SAVE FOREVER)"
     artifacts:
       - frontend/android/app/build/outputs/bundle/release/app-release.aab
+      - frontend/android/mindspace-upload-key.jks
