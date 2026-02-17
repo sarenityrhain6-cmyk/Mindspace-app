@@ -237,12 +237,15 @@ ReflectionResponse:
 
 ---
 
-## 8. Next Tasks (Immediate)
+## 8. Next Steps for Android App
 
-1. ✅ Week 1 Complete - Landing page, Terms, Welcome, Safety Consent, Dashboard with email collection working
-2. **Week 2 Focus:** Build the 10-question reflection module
-3. Begin planning scoring display UI
-4. Design reflection results page
+1. **Download Project**: Use "Save to Github" in Emergent
+2. **Install Android Studio**: https://developer.android.com/studio
+3. **Build APK**: Follow `/app/BUILD_ANDROID_APK.md`
+4. **Test on Device**: Install APK on Android phone
+5. **Submit to Play Store**: Complete listing and submit for review
+
+**Detailed Guide**: `/app/BUILD_ANDROID_APK.md`
 
 ---
 
